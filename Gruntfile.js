@@ -27,7 +27,7 @@ module.exports = function(grunt) {
           TEMPLATES: true
         }
       },
-      files: ['Gruntfile.js', 'src/js/**/*.js']
+      files: ['Gruntfile.js', 'src/js/**/*.js', '!src/js/**/*.es{5,6}.js']
     },
     csslint: {
       options: {
@@ -51,9 +51,37 @@ module.exports = function(grunt) {
       },
       src: ['src/css/**/*.css']
     },
+    traceur: {
+      options: {
+        experimental: true,
+        blockBinding: true
+      },
+      src: {
+        files: [
+          {
+            cwd: 'src/js',
+            expand: true,
+            src: ['**/*.es6.js'],
+            dest: 'src/js/',
+            ext: '.es5.js'
+          }
+        ]
+      },
+      samples: {
+        files: [
+          {
+            cwd: 'src/sample/',
+            expand: true,
+            src: ['**/*.es6.js'],
+            dest: 'src/sample/',
+            ext: '.js'
+          }
+        ]
+      }
+    },
     concat: {
       js: {
-        src : ['src/js/head.js', 'src/js/reveal.js', 'js/lib/handlebars.runtime.min.js', 'template/handlebars.js', 'src/js/**/*.js'],
+        src : ['src/js/head.js', 'src/js/reveal.js', 'js/lib/handlebars.runtime.min.js', 'template/handlebars.js', 'src/js/**/*.js', '!src/js/**/*.es6.js'],
         dest : 'js/scripts.js'
       },
       css: {
@@ -77,6 +105,17 @@ module.exports = function(grunt) {
             filter: 'isFile',
             src: ['src/css/theme/*.css'],
             dest: 'css/theme/'
+          }
+        ]
+      },
+      samples: {
+        files: [
+          {
+            flatten: true,
+            expand: true,
+            filter: 'isFile',
+            src: ['src/sample/**/*.js'],
+            dest: 'samples/'
           }
         ]
       }
@@ -184,9 +223,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
+  grunt.loadNpmTasks('grunt-traceur');
 
   // Default task
-  grunt.registerTask('default', ['jshint', 'csslint', 'handlebars', 'concat', 'copy', 'replace', 'uglify', 'cssmin', 'connect', 'watch']);
+  grunt.registerTask('default', ['jshint', 'csslint', 'handlebars', 'traceur', 'concat', 'copy', 'replace', 'uglify', 'cssmin', 'connect', 'watch']);
 
   // Compile theme
   grunt.registerTask('themes', ['sass']);

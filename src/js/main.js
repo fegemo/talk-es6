@@ -46,3 +46,7 @@ Reveal.addEventListener('ready', function() {
     el.classList.add('fragment');
   });
 });
+
+Reveal.addEventListener('timeline', function() {
+  
+}, false);

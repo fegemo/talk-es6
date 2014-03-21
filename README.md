@@ -2,65 +2,69 @@
 
 WARNING!! DON'T EDIT THE FILE README.md on the root of the project, that one is a GENERATED FILE!
 
-You should just edit the source file at src/README.md - the one which stars with ## Talk template
+You should just edit the source file at src/README.md - the one which stars with ## Ecmascript 6: Bring some harmony into your life
 
 -->
 
-## Talk template
-
+## Ecmascript 6: Bring some harmony into your life
+<!-- .slide: data-background="#ff0000" -->
 <img src="img/cover.jpg" class="logo" />
 
-Tiago Garcia @ [Avenue Code](http://www.avenuecode.com)
+Flavio Coutinho @ [Avenue Code](http://www.avenuecode.com)
 
-*tgarcia@avenuecode.com*
+*fcoutinho@avenuecode.com*
 
-Feb 11th, 2014
+Mar 30th, 2014
 
 ---
 
 ## Agenda
 
- - The template
-  - Installing
-  - Working
-  - Deploying
- - Your talk
-  - Organization
-  - Content requirements
-  - Communication requirements
-  - The DONT's
-  - Tips
-  - If you are recording
-
-----
-
-## Agenda
-
- - Contributing
- - Learn more
- - Conclusion
- - Assignment
+- The history of javascript
+- The 'Looks familiar?' series
+- Running ES6 today
+- Conclusion
+- Challenge
 
 ---
 
 ## Prerequisites
+- Experience with real-life javascript
+- Open mind
 
-- Markdown
-- Reveal.js
-- Grunt
+<iframe width="100%" height="300" frameborder="0" allowfullscreen src="http://www.es6fiddle.net/embed/ht0pk9dg/"></iframe>
 
 ---
 
-## The template
+<!-- .slide: data-state="timeline" -->
+## The history of javascript
 
-1. The Avenue Code talk template is a responsive, web-based talk template.
+1. |:1995:| Brendan Eich created javascript for Netscape
 1. This template is based on [Reveal.JS](http://lab.hakim.se/reveal-js).
 1. All you need to do is to write your content in [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
 1. There are some [Grunt](http://gruntjs.com) jobs to automatize the build process.
 1. It has *automatic code highlighting*, guessing the programming language you used.
 1. Once it is described in *README.md*, the talk contents will also be available as the repository description which is a common format for tutorials.
 
-----
+---
+
+## The "Looks Familiar" series
+
+asdfasdf
+
+---
+
+## let and const
+
+```js
+var jsFuture = "es6";
+(function () {
+  if (!jsFuture) { var jsFuture = "es5"; }
+  console.log(jsFuture);
+}());
+```
+
+---
 
 ## Setting up your repo
 
@@ -116,7 +120,7 @@ In order to *call out attention*, ...
 
 ---
 
-## Your talk
+## The "Looks Familiar?" series
 
  - Should last no more than 50 minutes, leave up to 10 minutes for questions.
  - Should not be too deep neither too superficial.
@@ -219,9 +223,10 @@ git push origin my-new-feature
 
 ## Learn more
 
-1. [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-1. [Reveal.JS](https://github.com/hakimel/reveal.js)
-1. [Grunt](http://gruntjs.com)
+1. [Use ECMAScript 6 Today, at tutsplus.com](http://code.tutsplus.com/articles/use-ecmascript-6-today--net-31582)
+1. [Examples of use of let, const and optional params](http://peter.michaux.ca/articles/javascript-is-dead-long-live-javascript)
+1. [ES6 Modules](http://www.infoq.com/news/2013/08/es6-modules)
+1. [ES6 Fiddle](http://www.es6fiddle.net/)
 
 ---
 

@@ -4640,7 +4640,7 @@ Reveal.addEventListener('ready', function() {
   'use strict';
 
   var footer = TEMPLATES.footer({
-    title: 'Ecmascript 6: Have some harmony in your life'
+    title: 'Ecmascript 6: Bring some harmony into your life'
   });
 
   var sectionEls = document.querySelectorAll('section:not(.stack)');
@@ -4655,3 +4655,7 @@ Reveal.addEventListener('ready', function() {
     el.classList.add('fragment');
   });
 });
+
+Reveal.addEventListener('timeline', function() {
+  
+}, false);
