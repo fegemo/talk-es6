@@ -4609,53 +4609,85 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   });
 /* global Reveal */
 /* global hljs */
+/* global TEMPLATES */
+/* global console */
 
-// Full list of configuration options available here:
-// https://github.com/hakimel/reveal.js#configuration
-Reveal.initialize({
-  controls: true,
-  progress: true,
-  history: true,
-  center: true,
+(function() {
+  'use scrict';
 
-  theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-  transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+  // Full list of configuration options available here:
+  // https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
 
-  // Parallax scrolling
-  // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-  // parallaxBackgroundSize: '2100px 900px',
+    theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+    transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
-  // Optional libraries used to extend on reveal.js
-  dependencies: [
-    { src: 'js/lib/classList.min.js', condition: function() { return !document.body.classList; } },
-    { src: 'js/plugin/markdown/marked.min.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-    { src: 'js/plugin/markdown/markdown.min.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-    { src: 'js/plugin/highlight/highlight.min.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-    { src: 'js/plugin/zoom-js/zoom.min.js', async: true, condition: function() { return !!document.body.classList; } },
-    { src: 'js/plugin/notes/notes.min.js', async: true, condition: function() { return !!document.body.classList; } }
-  ]
-});
+    // Parallax scrolling
+    // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+    // parallaxBackgroundSize: '2100px 900px',
 
-Reveal.addEventListener('ready', function() {
+    // Optional libraries used to extend on reveal.js
+    dependencies: [
+      { src: 'js/lib/classList.min.js', condition: function() { return !document.body.classList; } },
+      { src: 'js/plugin/markdown/marked.min.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'js/plugin/markdown/markdown.min.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'js/plugin/highlight/highlight.min.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'js/plugin/zoom-js/zoom.min.js', async: true, condition: function() { return !!document.body.classList; } },
+      { src: 'js/plugin/notes/notes.min.js', async: true, condition: function() { return !!document.body.classList; } },
+      { src: 'js/plugin/itemcloud/itemcloud.js', async: true, condition: function() { return document.querySelectorAll('[data-state="itemcloud"]'); } }
+    ]
+  });
+
+  Reveal.addEventListener('ready', function() {
+    'use strict';
+
+    var footer = TEMPLATES.footer({
+      title: 'Ecmascript 6: Bring some harmony into your life'
+    });
+
+    var sectionEls = document.querySelectorAll('section:not(.stack)');
+    var sections = Array.prototype.slice.call(sectionEls);
+    sections.forEach(function(el) {
+      el.innerHTML += footer;
+    });
+
+    var itemEls = document.querySelectorAll('div.slides section:not(:first-child) li, div.slides section:not(:first-child) p');
+    var items = Array.prototype.slice.call(itemEls);
+    items.forEach(function(el) {
+      el.classList.add('fragment');
+    });
+  });
+
+  Reveal.addEventListener('timeline', function() {
+    
+  }, false);
+
+}());
+(function() {
   'use strict';
-
-  var footer = TEMPLATES.footer({
-    title: 'Ecmascript 6: Bring some harmony into your life'
+  var itemCloudSlides = document.querySelectorAll('[data-state="itemcloud"]');
+  [].forEach.call(itemCloudSlides, function(cloud) {
+    cloud.style.textAlign = 'center';
+    var fragments = cloud.querySelectorAll('.fragment');
+    [].forEach.call(fragments, function(el) {
+      var percentage = Math.random() * 150 + 50;
+      el.style.fontSize = percentage + '%';
+      el.style.display = 'inline-block';
+      var col = Math.round(Math.random() * 155 + 100);
+      el.style.color = 'rgb(' + col + ',' + col + ',' + col + ')';
+    });
   });
+}());
 
-  var sectionEls = document.querySelectorAll('section:not(.stack)');
-  var sections = Array.prototype.slice.call(sectionEls);
-  sections.forEach(function(el) {
-    el.innerHTML += footer;
-  });
-
-  var itemEls = document.querySelectorAll('div.slides section:not(:first-child) li, div.slides section:not(:first-child) p');
-  var items = Array.prototype.slice.call(itemEls);
-  items.forEach(function(el) {
-    el.classList.add('fragment');
-  });
-});
-
-Reveal.addEventListener('timeline', function() {
-  
-}, false);
+// Adds LiveReload script pointing at the client's hostname.
+// This is helpful for mobile web development where your desktop might point at localhost while
+// your devices point to a local IP address.
+(function() {
+  'use strict';
+  /* jslint evil: true */
+  document.write('<script src="http://' + window.location.hostname + ':35729/livereload.js?snipver=1" type="text/javascript"><\/script>');
+}());

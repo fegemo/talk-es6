@@ -14,7 +14,8 @@
     "grunt-replace": "~0.6.1",
     "grunt-contrib-connect": "~0.6.0",
     "grunt-contrib-handlebars": "~0.6.1",
-    "grunt-traceur": "0.0.3"
+    "grunt-traceur": "0.0.3",
+    "grunt-inject": "~0.1.1"
   },
   "dependencies": {
     "traceur": "0.0.30"

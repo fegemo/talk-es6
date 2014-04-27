@@ -7,7 +7,6 @@ You should just edit the source file at src/README.md - the one which stars with
 -->
 
 ## Ecmascript 6: Bring some harmony into your life
-<!-- .slide: data-background="#ff0000" -->
 <img src="img/cover.jpg" class="logo" />
 
 Flavio Coutinho @ [Avenue Code](http://www.avenuecode.com)
@@ -39,12 +38,30 @@ Mar 30th, 2014
 <!-- .slide: data-state="timeline" -->
 ## The history of javascript
 
-1. |:1995:| Brendan Eich created javascript for Netscape
-1. This template is based on [Reveal.JS](http://lab.hakim.se/reveal-js).
-1. All you need to do is to write your content in [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
-1. There are some [Grunt](http://gruntjs.com) jobs to automatize the build process.
-1. It has *automatic code highlighting*, guessing the programming language you used.
-1. Once it is described in *README.md*, the talk contents will also be available as the repository description which is a common format for tutorials.
+1. |1995| Brendan Eich created javascript for Netscape
+1. |1996, August| Micro$oft created JSCript on IE and IIS 3.0
+1. |1996, November| Netscape submitted it to Ecma International -> ECMAScript
+1. |1997, June| ECMAScript 2
+1. |1999, December| ECMAScript 3
+1. |2009, December| ECMAScript 5 (?)
+1. |2011, June| ECMAScript 5.1
+1. |2014| ECMAScript 6
+
+---
+
+## New stuff coming in ES6
+
+<div data-state="itemcloud">
+- Block scope
+- Classes
+- Default function params
+- Destructuring
+- Rest and Spread operator
+- Array comprehension
+- Generators
+- Modules
+- Promises
+</div>
 
 ---
 
@@ -223,6 +240,7 @@ git push origin my-new-feature
 
 ## Learn more
 
+1. [Understanding ECMAScript 6](https://leanpub.com/understandinges6/read)
 1. [Use ECMAScript 6 Today, at tutsplus.com](http://code.tutsplus.com/articles/use-ecmascript-6-today--net-31582)
 1. [Examples of use of let, const and optional params](http://peter.michaux.ca/articles/javascript-is-dead-long-live-javascript)
 1. [ES6 Modules](http://www.infoq.com/news/2013/08/es6-modules)

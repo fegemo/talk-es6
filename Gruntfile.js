@@ -63,7 +63,7 @@ module.exports = function(grunt) {
             expand: true,
             src: ['**/*.es6.js'],
             dest: 'src/js/',
-            ext: '.es5.js'
+            ext: '.js'
           }
         ]
       },
@@ -77,11 +77,22 @@ module.exports = function(grunt) {
             ext: '.js'
           }
         ]
+      },
+      plugins: {
+        files: [
+          {
+            cwd: 'src/plugin/',
+            expand: true,
+            src: ['**/*.es6.js'],
+            dest: 'src/plugin/',
+            ext: '.js'
+          }
+        ]        
       }
     },
     concat: {
       js: {
-        src : ['src/js/head.js', 'src/js/reveal.js', 'js/lib/handlebars.runtime.min.js', 'template/handlebars.js', 'src/js/**/*.js', '!src/js/**/*.es6.js'],
+        src : ['src/js/head.js', 'src/js/reveal.js', 'js/lib/handlebars.runtime.min.js', 'template/handlebars.js', 'src/js/**/*.js', '!src/js/**/*.es6.js', '!src/js/plugin'],
         dest : 'js/scripts.js'
       },
       css: {
@@ -118,6 +129,15 @@ module.exports = function(grunt) {
             dest: 'samples/'
           }
         ]
+      },
+      plugins: {
+        files: [
+        {
+          cwd: 'src/js/plugin/',
+          expand: true,
+          src: ['**/*.js', '!**/*.es6.js'],
+          dest: 'js/plugin'
+        }]
       }
     },
     replace: {
@@ -191,6 +211,14 @@ module.exports = function(grunt) {
         }]
       }
     },
+    inject: {
+      html: {
+        scriptSrc: 'workflow.js',
+        files: {
+          'index.html': 'index.html'
+        }
+      },
+    },
     watch: {
       main: {
         files: ['Gruntfile.js', 'src/**/*.js', 'src/**/*.css', 'src/**/*.html', 'src/**/*.hbs', 'src/README.md', 'config.json'],
@@ -199,6 +227,9 @@ module.exports = function(grunt) {
       theme: {
         files: ['src/css/theme/**/*.scss'],
         tasks: ['sass', 'csslint', 'concat:css', 'copy:css', 'cssmin']
+      },
+      options: {
+        livereload: true
       }
     },
     connect: {
@@ -224,15 +255,16 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-traceur');
+  grunt.loadNpmTasks('grunt-inject');
 
   // Default task
-  grunt.registerTask('default', ['jshint', 'csslint', 'handlebars', 'traceur', 'concat', 'copy', 'replace', 'uglify', 'cssmin', 'connect', 'watch']);
+  grunt.registerTask('default', ['jshint', 'csslint', 'handlebars', 'traceur', 'concat', 'copy', 'replace', 'uglify', 'cssmin', 'inject', 'connect', 'watch']);
 
   // Compile theme
   grunt.registerTask('themes', ['sass']);
 
   // Build task
-  grunt.registerTask('build', ['jshint', 'csslint', 'handlebars', 'concat', 'copy', 'replace', 'uglify', 'cssmin']);
+  grunt.registerTask('build', ['jshint', 'csslint', 'handlebars', 'traceur', 'concat', 'copy', 'replace', 'uglify', 'cssmin']);
 
   // Serve presentation locally
   grunt.registerTask('serve', ['connect', 'watch']);
