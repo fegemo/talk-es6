@@ -63,7 +63,7 @@ module.exports = function(grunt) {
             expand: true,
             src: ['**/*.es6.js'],
             dest: 'src/js/',
-            ext: '.js'
+            ext: '.es5.js'
           }
         ]
       },
@@ -77,17 +77,6 @@ module.exports = function(grunt) {
             ext: '.js'
           }
         ]
-      },
-      plugins: {
-        files: [
-          {
-            cwd: 'src/plugin/',
-            expand: true,
-            src: ['**/*.es6.js'],
-            dest: 'src/plugin/',
-            ext: '.js'
-          }
-        ]        
       }
     },
     concat: {
@@ -136,7 +125,8 @@ module.exports = function(grunt) {
           cwd: 'src/js/plugin/',
           expand: true,
           src: ['**/*.js', '!**/*.es6.js'],
-          dest: 'js/plugin'
+          dest: 'js/plugin',
+          ext: '.js'
         }]
       }
     },
@@ -222,7 +212,7 @@ module.exports = function(grunt) {
     watch: {
       main: {
         files: ['Gruntfile.js', 'src/**/*.js', 'src/**/*.css', 'src/**/*.html', 'src/**/*.hbs', 'src/README.md', 'config.json'],
-        tasks: ['jshint', 'csslint', 'handlebars', 'concat', 'copy', 'replace', 'uglify', 'cssmin']
+        tasks: ['jshint', 'csslint', 'handlebars', 'traceur', 'concat', 'copy', 'replace', 'uglify', 'cssmin', 'inject']
       },
       theme: {
         files: ['src/css/theme/**/*.scss'],

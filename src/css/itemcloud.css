@@ -1,0 +1,12 @@
+.itemcloud {
+  text-align: center;
+  margin-top: 2em !important;
+  /*position: relative;*/
+}
+
+.clouditem {
+  display: inline-block !important;
+  padding-left: 0.15em !important;
+  padding-right: 0.15em !important;
+  line-height: 90%;
+}

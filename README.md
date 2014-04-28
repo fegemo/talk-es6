@@ -58,6 +58,7 @@ Mar 30th, 2014
 - Destructuring
 - Rest and Spread operator
 - Array comprehension
+- Quasi-literals
 - Generators
 - Modules
 - Promises
@@ -147,26 +148,44 @@ In order to *call out attention*, ...
 
 ----
 
-## Organization
+## Class
 
- - 1st slide: the cover, featuring your talk name, your name, the lecture date and AC logo.
- - 2nd slide: the agenda, in topics.
- - 3nd slide: the prerequisites of your talk.
- - From 4th slide on: your content
-  - When content from the same topic doesn't fit on a slide -> grow it *VERTICALLY* by adding a slide below (----).
-  - When you finish a topic and will start a different one -> grow it *HORIZONTALLY* by adding a slide to the right (---).
- - The 3 last slides: Conclusion, Learn more (with the reference links) and Challenge.
+```js
+function Vehicle(brand, type) {
+  this.brand = brand;
+  this.type = type;
+}
 
-----
+Vehicle.prototype.turnOn = function(options) {
+  //...  
+};
 
-## Content requirements
+function Car(brand, type, model) {
+  Vehicle.call(this, brand, type);
+  this.model = model;
+}
 
-1. *BE CONSISTENT*. Master the subject and do not contradict yourself.
-1. *CATCH THE ATTENTION*. Let the audience know WHY they cannot live one more day without this technology.
-1. *BALANCE THEORY AND PRACTICE*. Your target is keeping the subject interesting for everybody.
-1. *BE CONCISE*. Don't overexplain in such way you could cause confusion to your attendees.
-1. *KEEP THE FOCUS*. Off-topic discussions are ok, but only if it doesn't disturb the natural flow of your content.
-1. *BE PREPARED*. If you are going to use examples or live coding, make sure you have them all prepared beforehand.
+Car.prototype = Object.create(Vehicle.prototype);
+Car.prototype.turnOn = function(options) {
+  Vehicle.prototype.turnOn.call(this, options);
+  // do extra car stuff
+}
+```
+
+---
+
+## Class: Pros and Cons
+
+ Pros:
+
+ - classes make it *easier for newcomers* to get started with JavaScript
+ - have a *language supported inheritance mechanism*
+ - very *clear and expressive syntax*
+
+ Cons:
+
+ - do not prevent it from being used *without new*
+
 
 ----
 
@@ -243,6 +262,7 @@ git push origin my-new-feature
 1. [Understanding ECMAScript 6](https://leanpub.com/understandinges6/read)
 1. [Use ECMAScript 6 Today, at tutsplus.com](http://code.tutsplus.com/articles/use-ecmascript-6-today--net-31582)
 1. [Examples of use of let, const and optional params](http://peter.michaux.ca/articles/javascript-is-dead-long-live-javascript)
+1. [ES6 Classes](http://www.2ality.com/2012/07/esnext-classes.html)
 1. [ES6 Modules](http://www.infoq.com/news/2013/08/es6-modules)
 1. [ES6 Fiddle](http://www.es6fiddle.net/)
 
