@@ -26,7 +26,7 @@ var $__Object = Object, $__getOwnPropertyNames = $__Object.getOwnPropertyNames, 
         this.el = document.createElement('span');
         this.el.innerHTML = this.text;
         this.el.style.fontSize = this.size + '%';
-        this.el.style.color = 'rgb(' + this.color + ',' + this.color + ',' + this.color + ')';
+        this.el.style.color = ("rgb(" + this.color + ", " + this.color + ", " + this.color + ")");
         this.el.classList.add('clouditem');
         this.hasBeenPositenedRelatively = false;
         return this.el;

@@ -138,13 +138,9 @@ In order to *call out attention*, ...
 
 ---
 
-## The "Looks Familiar?" series
+# The "Looks Familiar?" series
 
- - Should last no more than 50 minutes, leave up to 10 minutes for questions.
- - Should not be too deep neither too superficial.
- - Give at least 3 reference links to be followed for further studies.
- - Give a challenge that would be solved using ideas that were covered on the talk.
- - It is ok to go a little bit far (forcing the attendee to do some research), but that should be optional.
+W
 
 ----
 
@@ -186,8 +182,36 @@ Car.prototype.turnOn = function(options) {
 
  - do not prevent it from being used *without new*
 
+---
 
-----
+## Quasi-Literals
+
+Have you seen this?
+
+```js
+var tone = Math.random() * 155 + 100;
+var color = 'rgb('+ tone  +', ' + tone + ', ' + tone + ')';
+```
+
+What about this?
+```js
+console.log('The server at ' + this.host + ' replied to the request ' + this.requestUrl + ' with a ' + this.response.status + ' HTTP status code and total length of ' + (this.response.payload.length*this.response.headers.length) + 'b.');
+```
+
+
+There is a better way:
+
+```js
+var tone = Math.random() * 155 + 100;
+var color = `rgb(${tone}, ${tone}, ${tone})`;
+```
+
+```js
+console.log(`The server at ${this.host} replied to the request ${this.requestUrl} with a ${this.response.status} HTTP status code and a payload of (this.response.payload.length*this.response.headers.length)}b.`);
+```
+
+
+---
 
 ## Communication requirements
 
@@ -265,6 +289,7 @@ git push origin my-new-feature
 1. [ES6 Classes](http://www.2ality.com/2012/07/esnext-classes.html)
 1. [ES6 Modules](http://www.infoq.com/news/2013/08/es6-modules)
 1. [ES6 Fiddle](http://www.es6fiddle.net/)
+1. [A Critical Review of quasi-literals](http://www.nczonline.net/blog/2012/08/01/a-critical-review-of-ecmascript-6-quasi-literals/)
 
 ---
 
