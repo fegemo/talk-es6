@@ -18,7 +18,7 @@
     transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
     // Parallax scrolling
-    parallaxBackgroundImage: '/img/harmony-bg.jpg',
+    parallaxBackgroundImage: '../img/harmony-bg.jpg',
     parallaxBackgroundSize: '2276px 1280px',
 
     // Optional libraries used to extend on reveal.js
