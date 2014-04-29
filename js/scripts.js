@@ -4627,8 +4627,8 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
     // Parallax scrolling
-    parallaxBackgroundImage: '/img/harmony-bg.jpg',
-    parallaxBackgroundSize: '2276px 1280px',
+    // parallaxBackgroundImage: '../img/harmony-bg.jpg',
+    // parallaxBackgroundSize: '2276px 1280px',
 
     // Optional libraries used to extend on reveal.js
     dependencies: [
@@ -4646,7 +4646,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     'use strict';
 
     var footer = TEMPLATES.footer({
-      title: 'Ecmascript 6: Bring some harmony into your life'
+      title: 'Ecmascript 6: Bring some harmony to your life'
     });
 
     var sectionEls = document.querySelectorAll('section:not(.stack)');
@@ -4697,34 +4697,7 @@ var $__Object = Object, $__getOwnPropertyNames = $__Object.getOwnPropertyNames, 
         this.el.style.fontSize = this.size + '%';
         this.el.style.color = ("rgb(" + this.color + ", " + this.color + ", " + this.color + ")");
         this.el.classList.add('clouditem');
-        this.hasBeenPositenedRelatively = false;
         return this.el;
-      },
-      saveOriginalCoords: function() {
-        if (!this.hasBeenPositenedRelatively) {
-          try {
-            throw undefined;
-          } catch (rect) {
-            rect = this.el.getBoundingClientRect();
-            this.originalX = (rect.left + rect.right) / 2;
-            this.originalY = (rect.top + rect.bottom) / 2;
-            this.width = rect.width;
-            this.height = rect.height;
-            this.sizeMouseMove = ((this.size - 50) / 150.0) * 3.0;
-            this.hasBeenPositenedRelatively = true;
-          }
-        }
-      },
-      mouseMove: function(e) {
-        this.saveOriginalCoords();
-        var xDiff = e.clientX - window.innerWidth / 2.0, yDiff = e.clientY - window.innerHeight / 2.0;
-        this.el.style.position = 'absolute';
-        this.el.style.left = (this.originalX - xDiff / this.sizeMouseMove - this.width) + 'px';
-        this.el.style.top = (this.originalY - yDiff / this.sizeMouseMove - this.height) + 'px';
-      },
-      mouseClick: function(e) {
-        var xDiff = e.clientX - window.innerWidth / 2.0, yDiff = e.clientY - window.innerHeight / 2.0;
-        window.alert('e.clientX: ' + e.clientX + ' | e.clientY: ' + e.clientY + ' | xDiff: ' + xDiff + ' | yDiff: ' + yDiff + ' | sizeMouseMove: ' + this.sizeMouseMove);
       }
     }, {});
     return $CloudItem;
@@ -4760,15 +4733,6 @@ var $__Object = Object, $__getOwnPropertyNames = $__Object.getOwnPropertyNames, 
             }
           }
         }
-        var self = this;
-        document.body.onmousemove = function(e) {
-          self.mouseMove(e);
-        };
-      },
-      mouseMove: function(e) {
-        for (var i = this.items.length - 1; i >= 0; i--) {
-          $traceurRuntime.elementGet(this.items, i).mouseMove(e);
-        }
       }
     }, {});
     return $Cloud;
@@ -4785,5 +4749,5 @@ var $__Object = Object, $__getOwnPropertyNames = $__Object.getOwnPropertyNames, 
 (function() {
   'use strict';
   /* jslint evil: true */
-  document.write('<script src="http://' + window.location.hostname + ':35729/livereload.js?snipver=1" type="text/javascript"><\/script>');
+  document.write('<script src="http://' + window.location.hostname + ':4444/livereload.js?snipver=1" type="text/javascript"><\/script>');
 }());

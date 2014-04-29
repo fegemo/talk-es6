@@ -219,7 +219,7 @@ module.exports = function(grunt) {
         tasks: ['sass', 'csslint', 'concat:css', 'copy:css', 'cssmin']
       },
       options: {
-        livereload: true
+        livereload: 4444
       }
     },
     connect: {

@@ -28,34 +28,7 @@ var $__Object = Object, $__getOwnPropertyNames = $__Object.getOwnPropertyNames, 
         this.el.style.fontSize = this.size + '%';
         this.el.style.color = ("rgb(" + this.color + ", " + this.color + ", " + this.color + ")");
         this.el.classList.add('clouditem');
-        this.hasBeenPositenedRelatively = false;
         return this.el;
-      },
-      saveOriginalCoords: function() {
-        if (!this.hasBeenPositenedRelatively) {
-          try {
-            throw undefined;
-          } catch (rect) {
-            rect = this.el.getBoundingClientRect();
-            this.originalX = (rect.left + rect.right) / 2;
-            this.originalY = (rect.top + rect.bottom) / 2;
-            this.width = rect.width;
-            this.height = rect.height;
-            this.sizeMouseMove = ((this.size - 50) / 150.0) * 3.0;
-            this.hasBeenPositenedRelatively = true;
-          }
-        }
-      },
-      mouseMove: function(e) {
-        this.saveOriginalCoords();
-        var xDiff = e.clientX - window.innerWidth / 2.0, yDiff = e.clientY - window.innerHeight / 2.0;
-        this.el.style.position = 'absolute';
-        this.el.style.left = (this.originalX - xDiff / this.sizeMouseMove - this.width) + 'px';
-        this.el.style.top = (this.originalY - yDiff / this.sizeMouseMove - this.height) + 'px';
-      },
-      mouseClick: function(e) {
-        var xDiff = e.clientX - window.innerWidth / 2.0, yDiff = e.clientY - window.innerHeight / 2.0;
-        window.alert('e.clientX: ' + e.clientX + ' | e.clientY: ' + e.clientY + ' | xDiff: ' + xDiff + ' | yDiff: ' + yDiff + ' | sizeMouseMove: ' + this.sizeMouseMove);
       }
     }, {});
     return $CloudItem;
@@ -90,15 +63,6 @@ var $__Object = Object, $__getOwnPropertyNames = $__Object.getOwnPropertyNames, 
               }
             }
           }
-        }
-        var self = this;
-        document.body.onmousemove = function(e) {
-          self.mouseMove(e);
-        };
-      },
-      mouseMove: function(e) {
-        for (var i = this.items.length - 1; i >= 0; i--) {
-          $traceurRuntime.elementGet(this.items, i).mouseMove(e);
         }
       }
     }, {});

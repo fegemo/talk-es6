@@ -2,11 +2,11 @@
 
 WARNING!! DON'T EDIT THE FILE README.md on the root of the project, that one is a GENERATED FILE!
 
-You should just edit the source file at src/README.md - the one which stars with ## Ecmascript 6: Bring some harmony into your life
+You should just edit the source file at src/README.md - the one which stars with ## Ecmascript 6: Bring some harmony to your life
 
 -->
 
-## Ecmascript 6: Bring some harmony into your life
+## Ecmascript 6: Bring some harmony to your life
 <img src="img/harmony.jpg" class="logo" />
 
 Flavio Coutinho @ [Avenue Code](http://www.avenuecode.com)
@@ -20,8 +20,12 @@ Apr 29th, 2014
 <!-- .slide: auto-fragments -->
 ## Agenda
 
-- The history of javascript
-- The 'Looks familiar?' series
+- Brief history of javascript
+- New features
+  - Scope
+  - Classes
+  - Default parameters
+  - ...
 - Running ES6 today
 - Conclusion
 - Challenge
@@ -66,12 +70,6 @@ Apr 29th, 2014
 - Modules
 - Promises
 </div>
-
----
-
-## The "Looks Familiar" series
-
-asdfasdf
 
 ---
 
@@ -298,14 +296,20 @@ Bottomline:
 
 ## Destructuring
 
-
+ - placeholder
+ - placeholder
+ - placeholder
+ - placeholder
 
 
 ---
 
 ## <b>FAT</b> vs <span style="font-family: monospace;">thin</span> arrow
 
-
+ - placeholder
+ - placeholder
+ - placeholder
+ - placeholder
 
 
 ---
@@ -402,6 +406,30 @@ See it on [ECMAScript 6 compatibility table](http://kangax.github.io/es5-compat-
 
 ---
 
+## Features not covered
+
+### Big stuff
+
+ - Promises
+ - Modules
+ - Maps and Sets
+ - Generators
+ - Annotations
+
+----
+
+## Features not covered
+
+### Not that big
+
+ - Computed Property Names
+ - Iterators and for-of
+ - Object Initializer Shorthand
+ - Symbols
+ - Array Comprehension
+
+---
+
 ## Conclusion
 
 - ECMAScript 6 brings features to the language that had been developed outside it
@@ -426,6 +454,4 @@ See it on [ECMAScript 6 compatibility table](http://kangax.github.io/es5-compat-
 
 ## Challenge
 
-1. Make your awesome talk based on this template.
-1. Push it to a gh-pages branch on your GitHub account.
-1. Share the URL with the world!
+ - placeholder
