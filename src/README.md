@@ -193,17 +193,16 @@ es6fiddle:
 
 ----
 
-<!-- .slide: data-auto-fragments="true" -->
-## Class: PROS and CONS
+## Class
 
- <b>PROS:</b>
+###PROS
 
  - classes make it *easier for newcomers* to get started with JavaScript
  - have a *language supported inheritance mechanism*
  - very *clear and expressive syntax*
 
 
- <b>CONS:</b>
+###CONS
 
  - does not prevent it from being used *without new*
  - no privacy control from the language
@@ -363,15 +362,16 @@ See more here: [A critical review of ES6 quasi-literals](http://www.nczonline.ne
 
 ----
 
-## String templates: Pros and Cons
+## String templates
 
- <b>PROS</b>
+###PROS
 
  - more elegant, less verbose string creation
  - multiline strings
  - allows the creation of DSLs
 
- <b>CONS</b>
+
+###CONS
 
  - substitution variables must be in the same scope
  ```js
