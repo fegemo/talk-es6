@@ -18,8 +18,8 @@
     transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
     // Parallax scrolling
-    // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-    // parallaxBackgroundSize: '2100px 900px',
+    parallaxBackgroundImage: '/img/harmony-bg.jpg',
+    parallaxBackgroundSize: '2276px 1280px',
 
     // Optional libraries used to extend on reveal.js
     dependencies: [
@@ -46,7 +46,7 @@
       el.innerHTML += footer;
     });
 
-    var itemEls = document.querySelectorAll('div.slides section:not(:first-child) li, div.slides section:not(:first-child) p');
+    var itemEls = document.querySelectorAll('div.slides section[data-auto-fragments="true"]:not(:first-child) li, div.slides section[data-auto-fragments="true"]:not(:first-child) p');
     var items = Array.prototype.slice.call(itemEls);
     items.forEach(function(el) {
       el.classList.add('fragment');

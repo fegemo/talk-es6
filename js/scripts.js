@@ -4627,8 +4627,8 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
     // Parallax scrolling
-    // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-    // parallaxBackgroundSize: '2100px 900px',
+    parallaxBackgroundImage: '/img/harmony-bg.jpg',
+    parallaxBackgroundSize: '2276px 1280px',
 
     // Optional libraries used to extend on reveal.js
     dependencies: [
@@ -4655,7 +4655,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
       el.innerHTML += footer;
     });
 
-    var itemEls = document.querySelectorAll('div.slides section:not(:first-child) li, div.slides section:not(:first-child) p');
+    var itemEls = document.querySelectorAll('div.slides section[data-auto-fragments="true"]:not(:first-child) li, div.slides section[data-auto-fragments="true"]:not(:first-child) p');
     var items = Array.prototype.slice.call(itemEls);
     items.forEach(function(el) {
       el.classList.add('fragment');
@@ -4710,7 +4710,7 @@ var $__Object = Object, $__getOwnPropertyNames = $__Object.getOwnPropertyNames, 
             this.originalY = (rect.top + rect.bottom) / 2;
             this.width = rect.width;
             this.height = rect.height;
-            this.sizeMouseMove = (this.size / 200.0) * 5.0;
+            this.sizeMouseMove = ((this.size - 50) / 150.0) * 3.0;
             this.hasBeenPositenedRelatively = true;
           }
         }

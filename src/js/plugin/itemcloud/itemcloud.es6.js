@@ -26,7 +26,7 @@
         this.originalY = (rect.top + rect.bottom) / 2;
         this.width = rect.width;
         this.height = rect.height;
-        this.sizeMouseMove = (this.size / 200.0) * 5.0;
+        this.sizeMouseMove = ((this.size - 50) / 150.0) * 3.0;
         this.hasBeenPositenedRelatively = true;
       }
     }

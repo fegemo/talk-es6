@@ -7,16 +7,17 @@ You should just edit the source file at src/README.md - the one which stars with
 -->
 
 ## Ecmascript 6: Bring some harmony into your life
-<img src="img/cover.jpg" class="logo" />
+<img src="img/harmony.jpg" class="logo" />
 
 Flavio Coutinho @ [Avenue Code](http://www.avenuecode.com)
 
 *fcoutinho@avenuecode.com*
 
-Mar 30th, 2014
+Apr 29th, 2014
 
 ---
 
+<!-- .slide: auto-fragments -->
 ## Agenda
 
 - The history of javascript
@@ -27,15 +28,14 @@ Mar 30th, 2014
 
 ---
 
+<!-- .slide: data-auto-fragments="true" -->
 ## Prerequisites
 - Experience with real-life javascript
 - Open mind
 
-<iframe width="100%" height="300" frameborder="0" allowfullscreen src="http://www.es6fiddle.net/embed/ht0pk9dg/"></iframe>
-
 ---
 
-<!-- .slide: data-state="timeline" -->
+<!-- .slide: data-state="timeline" data-auto-fragments="true" -->
 ## The history of javascript
 
 1. |1995| Brendan Eich created javascript for Netscape
@@ -58,6 +58,9 @@ Mar 30th, 2014
 - Destructuring
 - Rest and Spread operator
 - Array comprehension
+- FAT and thin arrows
+- Maps and Sets
+- Tail recursive calls
 - Quasi-literals
 - Generators
 - Modules
@@ -72,79 +75,60 @@ asdfasdf
 
 ---
 
-## let and const
+## Scope
+
+<p class="full-height-container">
+  <img src="img/three-little-pigs.jpg" class="full-height" />
+</p>
+
+----
+
+## *var*, <small>the older brother</small>
+
+ - Declares variables in the function scope (ES5) <!-- .element: class="fragment" data-fragment-index="1" -->
+ ```js
+ var name = 'I am the elder pig';
+
+ function whoAreYou() {
+    window.alert('who are you: ' + name);
+    var name = "don't know";
+ }
+
+ whoAreYou();
+ ```
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+Quiz of the day: whoAreYou()? <!-- .element: class="fragment" data-fragment-index="2" -->
+
+Answer: <!-- .element: class="fragment" data-fragment-index="3" --> *undefined* <!-- .element: class="fragment" data-fragment-index="3" --> <small>([on jsfiddle](http://jsfiddle.net/R2C2v/) for non-believers)</small> <!-- .element: class="fragment" data-fragment-index="3" -->
+
+<span>Why? </span> <!-- .element: class="fragment" data-fragment-index="4" -->
+<span>YUI? </span> <!-- .element: class="fragment" data-fragment-index="5" -->
+<span>Because of *hoisting*!</span> <!-- .element: class="fragment" data-fragment-index="6" -->
+
+----
+
+## *let* and *const*, <small>the twins</small>
 
 ```js
-var jsFuture = "es6";
-(function () {
-  if (!jsFuture) { var jsFuture = "es5"; }
-  console.log(jsFuture);
-}());
+const DAILY_PIG_FOOD = 800; // grams
+
+function feedPigs(piggery) {
+  for (let i = 0; i < piggery.length; i++) {
+    piggery[i].feed(DAILY_PIG_FOOD);
+  }
+
+  console.log('i: ' + i);   // throws error: ReferenceError: i is not defined
+  DAILY_PIG_FOOD = 400;     // executes ok
+  console.log('DAILY_PIG_FOOD: ' + DAILY_PIG_FOOD); // prints 800
+}
 ```
+
+See more at: [An introduction to ES6 Part 2: Block Scoping](http://globaldev.co.uk/2013/09/es6-part-2/)
 
 ---
 
-## Setting up your repo
-
-1. Sign in on GitHub
-1. Fork the repository <https://github.com/acbr/talk-template>
-1. Rename it to match your talk name (ex: *talk-design-patterns*)
-1. Clone this repository
-1. Navigate to its folder on the terminal
-
-----
-
-## Building and running
-
-1. Install [Node.js](http://nodejs.org/)
-1. Install [Grunt](http://gruntjs.com/getting-started#installing-the-cli)
-1. On the repo folder, install the npm dependencies
-```sh
-$ npm install
-```
-1. Build it, serve it and monitor source files for changes
-```sh
-$ grunt
-```
-1. Open <http://localhost:8000> to view your talk
-
-----
-
-## Working
-
-1. Open up *config.json* and fill your talk data such as title, author, email, date and description.
-  - That is the *ONLY FILE* you should edit on the project root!
-1. Any further change you will do is inside the *src* folder, such as:
-  - *src/README.md* to write your talk content in *Markdown*
-  - *src/index.html* to modify the HTML
-1. Grunt will generate files on the project root as you change *src*.
-1. In order to separate slides horizontally, use 3 dashes (---).
-1. In order to separate slides vertically, use 4 dashes (----).
-1. In order to *call out attention*, put an asterisk around your text:
-```
-In order to *call out attention*, ...
-```
-
-----
-
-## Deploying
-
-1. Make sure your build is not breaking.
-  - You should see *Done, without errors.* in the terminal.
-1. *git add*, *git commit* and *git push* to *gh-pages* branch.
-1. You should see your talk in an address like:
-  - http://*your-github-username*.github.io/*your-repo-name*
-  - Ex: <http://acbr.github.io/talk-template>
-
----
-
-# The "Looks Familiar?" series
-
-W
-
-----
-
-## Class
+## Class <small>(ES5)</small>
 
 ```js
 function Vehicle(brand, type) {
@@ -156,6 +140,30 @@ Vehicle.prototype.turnOn = function(options) {
   //...  
 };
 
+```
+
+----
+
+## Class <small>(*ES6*)</small>
+
+```js
+class Vehicle {
+  constructor(brand, type) {
+    this.brand = brand;
+    this.type = type;
+  }
+  turnOn(options) {
+    //...
+  }
+}
+
+```
+
+----
+
+## Class Inheritance <small>(ES5)</small>
+
+```js
 function Car(brand, type, model) {
   Vehicle.call(this, brand, type);
   this.model = model;
@@ -168,116 +176,238 @@ Car.prototype.turnOn = function(options) {
 }
 ```
 
----
+----
 
-## Class: Pros and Cons
+## Class Inheritance <small>(*ES6*)</small>
 
- Pros:
+```js
+class Car extends Vehicle {
+  turnOn(options) {
+    super.turnOn(options);
+  }
+}
+```
+
+es6fiddle:
+
+ - [Car and vehicle](http://www.es6fiddle.net/hukmpu6l/)
+ - [Item Cloud RevealJS plugin](http://www.es6fiddle.net/hukn6opl/)
+
+----
+
+<!-- .slide: data-auto-fragments="true" -->
+## Class: PROS and CONS
+
+ <b>PROS:</b>
 
  - classes make it *easier for newcomers* to get started with JavaScript
  - have a *language supported inheritance mechanism*
  - very *clear and expressive syntax*
 
- Cons:
 
- - do not prevent it from being used *without new*
+ <b>CONS:</b>
+
+ - does not prevent it from being used *without new*
+ - no privacy control from the language
 
 ---
 
-## Quasi-Literals
+## Default arguments
 
-Have you seen this?
+How we do it: <!-- .element: class="fragment" data-fragment-index="1" -->
+
+```js
+function tellHistory(lang, year) {
+  return (lang || 'C') + ' was created around the year ' + (year || 1972);
+}
+```
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+In ES6: <!-- .element: class="fragment" data-fragment-index="2" -->
+
+```js
+function tellHistory(lang = 'C', year = 1972) {
+  return lang + ' was created around the year ' + year;
+}
+```
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+---
+
+## *Rest* and Spread <small>operators</small>
+
+How can you create an html unordered list, given its text elements? <!-- .element: class="fragment" data-fragment-index="1" -->
+
+```js
+function createHTMLList() {
+  var args = Array.prototype.slice.call(arguments),
+  return '<li>' + args.join('</li><li>') + '</li>';
+}
+```
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+But on ES6, we can use the <!-- .element: class="fragment" data-fragment-index="2" --> *rest* <!-- .element: class="fragment" data-fragment-index="2" --> operator instead of <!-- .element: class="fragment" data-fragment-index="2" --> *arguments*: <!-- .element: class="fragment" data-fragment-index="2" -->
+```js
+function createHTMLList(...items) {
+  return '<li>' + items.join('</li><li>') + '</li>';
+}
+```
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+----
+
+## Rest and *Spread* <small>operators</small>
+
+How can you instantiate a date from the values of 3 inputs (day, month, year)? <!-- .element: class="fragment" data-fragment-index="1" -->
+
+```js
+var day = getDateDay(),
+    month = getDateMonth(),
+    year = getDateYear();
+var d = new Date(year, month, day);
+```
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+But on ES6, we can leverage the <!-- .element: class="fragment" data-fragment-index="2" --> *spread* <!-- .element: class="fragment" data-fragment-index="2" --> operator: <!-- .element: class="fragment" data-fragment-index="2" -->
+
+```js
+var dateFields = getDateFieldsValues(),
+    d = new Date(...dateFields);
+```
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+----
+
+## *Rest* and *Spread* <small>operators</small>
+
+Bottomline:
+
+ - the *rest* operator turns a parameter into an array of values
+ - the *spread* operator turns an array of values into "comma-separated" values
+   ```
+   var pets = ['rat', 'dragon', 'bee'];
+
+   console.log(pets);                      // prints: rat, dragon, bee
+   console.log(...pets);                   // prints: rat dragon bee
+   console.log(pets[0], pets[1], pets[2])  // prints: rat dragon bee
+   ```
+   Run on [es6fiddle](http://www.es6fiddle.net/huktq4ed/)
+ - both have the same symbol: ...
+
+---
+
+## Destructuring
+
+
+
+
+---
+
+## <b>FAT</b> vs <span style="font-family: monospace;">thin</span> arrow
+
+
+
+
+---
+
+## String templates <small>(quasi-literals)</small>
+
+Have you seen this? <!-- .element: class="fragment" data-fragment-index="1" -->
 
 ```js
 var tone = Math.random() * 155 + 100;
 var color = 'rgb('+ tone  +', ' + tone + ', ' + tone + ')';
 ```
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
-What about this?
-```js
-console.log('The server at ' + this.host + ' replied to the request ' + this.requestUrl + ' with a ' + this.response.status + ' HTTP status code and total length of ' + (this.response.payload.length*this.response.headers.length) + 'b.');
-```
-
-
-There is a better way:
+There is a better way:<!-- .element: class="fragment" data-fragment-index="2" -->
 
 ```js
 var tone = Math.random() * 155 + 100;
 var color = `rgb(${tone}, ${tone}, ${tone})`;
 ```
+<!-- .element: class="fragment" data-fragment-index="2" -->
+
+What about this? <!-- .element: class="fragment" data-fragment-index="3" -->
 
 ```js
-console.log(`The server at ${this.host} replied to the request ${this.requestUrl} with a ${this.response.status} HTTP status code and a payload of (this.response.payload.length*this.response.headers.length)}b.`);
+console.log('Cart total: R$ ' + (quantity * unitPrice) + ',00');
 ```
+<!-- .element: class="fragment" data-fragment-index="3" -->
+
+Becomes: <!-- .element: class="fragment" data-fragment-index="4" -->
+
+```js
+console.log(`Cart total: R\$ ${quantity * unitPrice},00`);
+```
+<!-- .element: class="fragment" data-fragment-index="4" -->
+
+----
+
+## String templates
+
+General form: <!-- .element: class="fragment" data-fragment-index="1" -->
+
+```js
+tag`literal${substitution}literal`
+```
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+In which the tag is a function that can post-process the template after the substitution happens. <!-- .element: class="fragment" data-fragment-index="2" -->
+
+See more here: [A critical review of ES6 quasi-literals](http://www.nczonline.net/blog/2012/08/01/a-critical-review-of-ecmascript-6-quasi-literals/#content) <!-- .element: class="fragment" data-fragment-index="2" -->
+
+----
+
+## String templates: Pros and Cons
+
+ <b>PROS</b>
+
+ - more elegant, less verbose string creation
+ - multiline strings
+ - allows the creation of DSLs
+
+ <b>CONS</b>
+
+ - substitution variables must be in the same scope
+ ```js
+ var msg = `Hello, ${place}`;    // throws error
+ ```
+ - cannot externalize strings
 
 
 ---
 
-## Communication requirements
+## Running ES6 today
 
-1. *COMMUNICATE WELL*. Be sharp on English, no bad words or slangs and use the best words for the audience.
-1. *BE A PRO*. Please watch some good screencasts in order to learn how to use your voice and conduct the talk.
-1. *BE POLITE*. Be respectful and avoid heavy criticism.
-1. *BE PROFESSIONAL*. Use jokes and humor with parsimony.
-1. *TRAIN* your full talk at least once before your talk.
+ - As of today, there is no browser that supports all of the ES6 features.
 
-----
+ - This curated table shows the current compatibility table for each feature:
 
-## The DONT's
+<img src="img/es6-compatibility-table.jpg" style="max-height: 200px">
 
-1. *DO NEVER SHOW PRIVATE CODE FROM THE CLIENT*. This is CRITICAL and can cause serious problems.
-1. *DON'T BE ARROGANT*. Be humble and don't focus the talk on yourself.
-1. *DON'T GENERALIZE*, specially stuff that you are not sure about.
-1. *DON'T MAKE UP DATA*. Base yourself on trustable references.
-1. *DON'T TALK LIKE A ROBOT*. Just be yourself, natural. Relax :)
+See it on [ECMAScript 6 compatibility table](http://kangax.github.io/es5-compat-table/es6/)
 
 ----
 
-## Tips
+## Running ES6 today
 
- - *ENJOY* your experience by creating the talk, because you will surely learn MUCH MORE than your attendees.
- - *BRING WATER* to drink while you present. You will certainly need it!
- - *BE OPEN* to receive questions and even criticism. You will learn a lot from them.
- - *ALWAYS* be polite when talking to your audience. This will always open doors for you.
- - People might come to you with questions and more complex cases after your talk. Consider it as a gift, it means you represent something good for them!
+ - This presentation was partially built on ES6
+   You can check its source code on the [Github repository](https://github.com/fegemo/talk-es6)
+ - I used [google-traceur](https://github.com/google/traceur-compiler): an ES6 to ES5 transpiler
 
-----
+<img src="img/tc.png" style="max-height: 240px">
 
-## If you are recording
-
-- Make sure you use a professional microphone when available.
-- Don't do *drastic transitions* on your screen, as the recorded amount of frames per second is low.
-- Ask atendees to only make questions on the end - so future watchers will just get the real content without interruption.
-- Introduce yourself: "Hello everybody, my name is xxxx, I work for Avenue Code and today's talk will be about yyyyy". Finish it like: "That's it, thanks for watching.".
-- Problems with recording/connection? Always restart from the beginning of the slide. Don't try to restart from where it fails, its impossible to do a clean cut on the video after that.
-
----
-
-## Contributing
-
-Should you wish to contribute, please be welcome to!
-
-1. Fork the repository <https://github.com/acbr/talk-template>
-1. Create a feature branch for your contribution
-```sh
-git checkout -b my-new-feature
-```
-1. Commit your changes
-```sh
-git commit -am 'Add some feature'
-```
-1. Push to the branch
-```sh
-git push origin my-new-feature
-```
-1. Create a Pull Request
+ - Here is the [list of features](https://github.com/google/traceur-compiler/wiki/LanguageFeatures) supported by traceur
 
 ---
 
 ## Conclusion
 
-- This talk template rocks!
-- Your life should be easier now.
+- ECMAScript 6 brings features to the language that had been developed outside it
+- There is no 100%-ready environment that supports the full ES6 yet
+- We can use some features of ES6 today
+- More juice will come on ES7 (e.g., privacy in classes)
 
 ---
 
@@ -286,6 +416,7 @@ git push origin my-new-feature
 1. [Understanding ECMAScript 6](https://leanpub.com/understandinges6/read)
 1. [Use ECMAScript 6 Today, at tutsplus.com](http://code.tutsplus.com/articles/use-ecmascript-6-today--net-31582)
 1. [Examples of use of let, const and optional params](http://peter.michaux.ca/articles/javascript-is-dead-long-live-javascript)
+1. [ECMAScript 6 compatibility table](http://kangax.github.io/es5-compat-table/es6/)
 1. [ES6 Classes](http://www.2ality.com/2012/07/esnext-classes.html)
 1. [ES6 Modules](http://www.infoq.com/news/2013/08/es6-modules)
 1. [ES6 Fiddle](http://www.es6fiddle.net/)
