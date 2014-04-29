@@ -17,7 +17,7 @@ Apr 29th, 2014
 
 ---
 
-<!-- .slide: auto-fragments -->
+<!-- .slide: data-auto-fragments="true" -->
 ## Agenda
 
 - Brief history of javascript
@@ -42,14 +42,14 @@ Apr 29th, 2014
 <!-- .slide: data-state="timeline" data-auto-fragments="true" -->
 ## The history of javascript
 
-1. |1995| Brendan Eich created javascript for Netscape
-1. |1996, August| Micro$oft created JSCript on IE and IIS 3.0
-1. |1996, November| Netscape submitted it to Ecma International -> ECMAScript
-1. |1997, June| ECMAScript 2
-1. |1999, December| ECMAScript 3
-1. |2009, December| ECMAScript 5 (?)
-1. |2011, June| ECMAScript 5.1
-1. |2014| ECMAScript 6
+- *1995* Brendan Eich created javascript for Netscape
+- *1996, August* Micro$oft created JScript on IE and IIS 3.0
+- *1996, November* Netscape submitted it to Ecma International -> ECMAScript
+- *1997, June* ECMAScript 2
+- *1999, December* ECMAScript 3
+- *2009, December* ECMAScript 5
+- *2011, June* ECMAScript 5.1
+- *2014* ECMAScript 6
 
 ---
 
@@ -88,8 +88,8 @@ Apr 29th, 2014
  var name = 'I am the elder pig';
 
  function whoAreYou() {
-    window.alert('who are you: ' + name);
-    var name = "don't know";
+     window.alert('who are you: ' + name);
+     var name = "don't know";
  }
 
  whoAreYou();
@@ -295,21 +295,49 @@ Bottomline:
 
 ## Destructuring
 
- - placeholder
- - placeholder
- - placeholder
- - placeholder
+Decapting an array:
+```js
+var [head, ...tail] = [1, 2, 3, 4];
+console.log(tail);  // prints [2, 3, 4]
+```
 
+The 'swap' trick:
+```js
+var a = 1;
+var b = 3;
 
----
+[a, b] = [b, a];  // a=3, b=1
+```
+----
 
-## <b>FAT</b> vs <span style="font-family: monospace;">thin</span> arrow
+## Destructuring
 
- - placeholder
- - placeholder
- - placeholder
- - placeholder
+An object:
 
+```js
+var currentSong = {
+  title: 'Higher Love',
+  artist: 'Depeche Mode',
+  album: {
+    title: 'Songs of Faith and Devotion',
+    releaseDate: '1993'
+  }
+};
+
+var logSongInfo = function logSongInfo({ title, artist,
+  album: {releaseDate: year} }) {
+
+  console.log('Title: ' + title + '\nArtist: ' + artist
+    + '\nYear: ' + year);
+};
+
+logSongInfo(currentSong);
+/*
+Title: Higher Love
+Artist: Depeche Mode
+Year: 1993
+*/
+```
 
 ---
 
@@ -415,6 +443,7 @@ See it on [ECMAScript 6 compatibility table](http://kangax.github.io/es5-compat-
  - Maps and Sets
  - Generators
  - Annotations
+ - <b>FAT</b> vs <span style="font-family: monospace;">thin</span> arrow
 
 ----
 
@@ -430,12 +459,13 @@ See it on [ECMAScript 6 compatibility table](http://kangax.github.io/es5-compat-
 
 ---
 
+<!-- .slide: data-auto-fragments="true" -->
 ## Conclusion
 
-- ECMAScript 6 brings features to the language that had been developed outside it
-- There is no 100%-ready environment that supports the full ES6 yet
-- We can use some features of ES6 today
-- More juice will come on ES7 (e.g., privacy in classes)
+- ECMAScript 6 brings *features* to the language *that had been developed outside* it
+- There is *no 100%-ready environment* that supports the full ES6 yet
+- We can use *some features of ES6 today*
+- *More* juice will come *on ES7* (e.g., privacy in classes)
 
 ---
 
@@ -446,12 +476,40 @@ See it on [ECMAScript 6 compatibility table](http://kangax.github.io/es5-compat-
 1. [Examples of use of let, const and optional params](http://peter.michaux.ca/articles/javascript-is-dead-long-live-javascript)
 1. [ECMAScript 6 compatibility table](http://kangax.github.io/es5-compat-table/es6/)
 1. [ES6 Classes](http://www.2ality.com/2012/07/esnext-classes.html)
+
+----
+
+## Learn even more
+
 1. [ES6 Modules](http://www.infoq.com/news/2013/08/es6-modules)
 1. [ES6 Fiddle](http://www.es6fiddle.net/)
 1. [A Critical Review of quasi-literals](http://www.nczonline.net/blog/2012/08/01/a-critical-review-of-ecmascript-6-quasi-literals/)
+1. [Destructuring Assignment in ECMAScript 6](http://fitzgeraldnick.com/weblog/50/)
 
 ---
 
 ## Challenge
 
- - placeholder
+1. Fork the [repo with this presentation](https://github.com/fegemo/talk-es6)
+1. Edit the itemcloud RevealJS plugin to display the items in a colorful way
+1. Take a screenshot of your itemcloud and <span style="text-decoration: line-through; color: #aaa">set it as your Skype profile picture</span>send it to me
+
+----
+
+### Technical Description
+
+- After you have cloned, run this to open the presentation locally
+```js
+> grunt
+```
+- Look at this path to find the plugin code:
+```js
+talk-es6/src/js/plugin/itemcloud/itemcloud.es6.js
+```
+
+----
+
+### Extras
+
+ - other changes to the plugin are also welcome - maybe put some movement here and there, or making the items clickable
+ - another optional task is to create a plugin to display a timeline (for the "history" slide)
