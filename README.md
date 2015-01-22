@@ -76,7 +76,7 @@ Apr 29th, 2014
 ## Scope
 
 <p class="full-height-container">
-  <img src="img/three-little-pigs.jpg" class="full-height" />
+  <img src="img/three-little-pigs.jpg" style="height: 500px; width: auto;" />
 </p>
 
 ----
@@ -205,7 +205,7 @@ es6fiddle:
 ###CONS
 
  - does not prevent it from being used *without new*
- - no privacy control from the language
+ - no privacy control from the language, yet
 
 ---
 
@@ -295,7 +295,7 @@ Bottomline:
 
 ## Destructuring
 
-Decapting an array:
+Decapitating an array:
 ```js
 var [head, ...tail] = [1, 2, 3, 4];
 console.log(tail);  // prints [2, 3, 4]
@@ -308,6 +308,7 @@ var b = 3;
 
 [a, b] = [b, a];  // a=3, b=1
 ```
+
 ----
 
 ## Destructuring
